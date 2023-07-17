@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List Page</title>
+
+<!-- <form action="/list" method="POST"> -->
+    <!-- {{data}} -->
+    <table border = "2" align = "center">
+
+        {% for x in data %}
+            <th style="color: blueviolet;">ID</th>
+            <th style="color: blueviolet;">Title</th>
+            <th style="color: blueviolet;">Description</th>
+            <th style="color: blueviolet;">Author</th>
+            <th style="color: blueviolet;">Time</th>
+            <tr align = "center">
+                <td>{{ x['id'] }}</td>
+                <td>{{ x['title'] }}</td>
+                <td>{{ x['desc'] }}</td>
+                <td>{{ x['author'] }}</td>
+                <td>{{ x['create_at'] }}</td>
+            </tr>                   
+        {% endfor %}
+    </table>
