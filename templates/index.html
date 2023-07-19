@@ -1,25 +1,32 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>웹페이지</title>
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
     <style>
-        h1{
+        h1 {
             color: green;
         }
     </style>
 </head>
+
 <body>
-    
+
     <h1>Hello World</h1>
     {% if name and hello %}
-    <h3>  {{name}}  님  {{hello}} </h3>
+    <h3> {{name}} 님 {{hello}} </h3>
     <!-- <span> {{ header }} </span> -->
     {% else %}
     <h3>입력한 데이터가 없습니다....</h3>
     {% endif %}
-      
+    <a href="/register"><button class="btn bg-warning">회원가입</button></a>
+    <a href="/login"><button class="btn bg-primary">로그인</button></a>
 </body>
+
 </html>

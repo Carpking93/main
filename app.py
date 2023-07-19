@@ -1,9 +1,16 @@
 #서버 뛰우기
 from flask import Flask , render_template , request  
 from data import Articles
+from mysql import Mysql
+import config
+import pymysql
+
 # print(Articles())
 #flask 안에 Flask 객체를 가져온다.
+
 app = Flask(__name__)
+
+mysql = Mysql(password=config.password)
 
 @app.route('/',methods=['GET','POST'])
 def index():
@@ -42,6 +49,34 @@ def hello():
 def list():    
     data = Articles()      
     return render_template("list.html",data = data)
+
+@app.route('/register',methods = ["GET","POST"])
+def register():
+    if request.method == 'POST':
+        username = request.form["username"]
+        email = request.form["email"]
+        phone = request.form["phone"]
+        password = request.form["password"]
+        print(username,email,phone,password)
+                
+        db = pymysql.connect(host=mysql.host, user=mysql.user, db=mysql.db, password=mysql.password, charset=mysql.charset)
+        curs = db.cursor()
+
+        sql = f'SELECT * FROM user WHERE email = %s;'
+        
+        curs.execute(sql, email) 
+
+        rows = curs.fetchall()
+        print(rows)
+        if rows:
+            return "Persistance Denied"
+        else:
+            result = mysql.insert_user(username,email,phone,password)
+            print(result)
+            return "succes"
+    
+    elif request.method=="GET":
+        return render_template('register.html')
    
 
 if __name__ == '__main__':
